@@ -1,0 +1,10 @@
+services:
+  frontend:
+    build: .
+    image: bytespace/bytespace-web:latest
+    container_name: bytespace-web
+    ports:
+      - "${PORT:-3300}:3300"
+    env_file:
+      - .env
+    restart: unless-stopped
