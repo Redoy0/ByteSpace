@@ -39,7 +39,7 @@ export function CourseCard({ course, className, priority }: CourseCardProps) {
   return (
     <article
       className={cn(
-        "group hover:shadow-bs-card relative flex flex-col rounded-[24px] border border-bs-gray-200 bg-white p-[15px] pb-5 transition-shadow duration-200",
+        "group hover:shadow-bs-card relative flex flex-col rounded-[24px] border border-(--bs-gray-200) bg-white p-[15px] pb-5 transition-shadow duration-200",
         className
       )}
     >

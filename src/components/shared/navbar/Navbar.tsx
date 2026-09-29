@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ShoppingBasket01Icon } from "@hugeicons/core-free-icons";
-import { ByteSpaceLogo } from "@/components/icons/svgIcons";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 import { PUBLIC_ROUTES } from "@/constant/routes";
 import { MobileMenu } from "./MobileMenu";
 import { NavbarActions } from "./NavbarActions";
@@ -20,9 +20,18 @@ export default function Navbar() {
         <Link
           href={PUBLIC_ROUTES.home}
           aria-label="ByteSpace home"
-          className="justify-self-start rounded-sm text-(--nav-logo) focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--nav-hover) md:-translate-y-2"
+          className="justify-self-start rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--nav-hover) md:-translate-y-[7px]"
         >
-          <ByteSpaceLogo tone="inherit" className="h-7 md:h-[34px]" />
+          {/* NavbarShell's data-overlay picks the light logo over the blue hero */}
+          <BrandLogo
+            priority
+            className="h-[30px] in-data-[overlay=true]:hidden md:h-[37px]"
+          />
+          <BrandLogo
+            tone="light"
+            priority
+            className="hidden h-[30px] in-data-[overlay=true]:block md:h-[37px]"
+          />
         </Link>
 
         <nav aria-label="Main" className="hidden md:block">

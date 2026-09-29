@@ -23,8 +23,8 @@ export function NavbarShell({ children }: { children: React.ReactNode }) {
       className={cn(
         "z-40 w-full",
         isOverlay
-          ? "absolute inset-x-0 top-0 [--nav-active:#fff] [--nav-fg:var(--bs-gray-50)] [--nav-hover:var(--bs-lime-400)] [--nav-logo:#fff]"
-          : "sticky top-0 border-b border-bs-gray-100 bg-white/90 backdrop-blur-md [--nav-active:var(--bs-gray-950)] [--nav-fg:var(--bs-gray-600)] [--nav-hover:var(--bs-blue-800)] [--nav-logo:var(--bs-gray-950)]"
+          ? "absolute inset-x-0 top-0 [--nav-active:#fff] [--nav-fg:var(--bs-gray-50)] [--nav-hover:var(--bs-lime-400)]"
+          : "sticky top-0 border-b border-(--bs-gray-100) bg-white/90 backdrop-blur-md [--nav-active:var(--bs-gray-950)] [--nav-fg:var(--bs-gray-600)] [--nav-hover:var(--bs-blue-800)]"
       )}
     >
       {children}

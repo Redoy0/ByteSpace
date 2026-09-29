@@ -1,62 +1,72 @@
+import type { ComponentType, SVGProps } from "react";
 import {
-  BriefcaseBusiness,
-  Camera,
-  Code2,
-  Megaphone,
-  Palette,
-  MonitorSmartphone,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+  ConnectWithoutContactIcon,
+  DesignServicesIcon,
+  DeveloperModeIcon,
+  DomainIcon,
+  LaptopIcon,
+  PhotoCameraFrontIcon,
+} from "@/components/icons/svgIcons";
 import { LEARNING_PATHS } from "@/data/home";
+import type { LearningPathIcon } from "@/types/home";
 
-const iconMap = {
-  design: Palette,
-  development: Code2,
-  software: MonitorSmartphone,
-  business: BriefcaseBusiness,
-  marketing: Megaphone,
-  photography: Camera,
+const ICONS: Record<
+  LearningPathIcon,
+  ComponentType<SVGProps<SVGSVGElement>>
+> = {
+  design: DesignServicesIcon,
+  development: DeveloperModeIcon,
+  software: LaptopIcon,
+  business: DomainIcon,
+  marketing: ConnectWithoutContactIcon,
+  photography: PhotoCameraFrontIcon,
 };
 
+/**
+ * "Explore Diverse Learning Paths" (ui/Home.png; ui/Landing/Frame 9 + 10).
+ * No top padding: it continues the white course section, whose bottom
+ * padding is the gap above the heading.
+ */
 export function LearningPathsSection() {
   return (
-    <section className="bg-white py-16 md:py-20 xl:py-[104px]">
+    <section
+      aria-labelledby="learning-paths-title"
+      className="bg-white pb-16 md:pb-20 xl:pb-[120px]"
+    >
       <div className="layout-container">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-bs-blue-800 mb-4 text-sm font-semibold tracking-[0.22em] uppercase">
-            Learning paths
-          </p>
-          <h2 className="typo-heading-m md:typo-heading-l text-bs-ink">
+        <div className="mx-auto max-w-[917px] text-center">
+          {/* #040819 is the design's heading colour; it has no token */}
+          <h2
+            id="learning-paths-title"
+            className="typo-heading-s text-balance text-[#040819]"
+          >
             Explore Diverse Learning Paths at ByteSpace
           </h2>
+          <p className="typo-body-m sm:typo-body-l text-bs-gray-400 mt-4">
+            At ByteSpace, we believe in empowering individuals through
+            knowledge. Our diverse range of courses spans various fields,
+            ensuring there&apos;s something for everyone. Unleash your potential
+            and explore our carefully curated categories.
+          </p>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:mt-[68px] lg:grid-cols-6 xl:gap-10">
           {LEARNING_PATHS.map((path) => {
-            const Icon = iconMap[path.icon as keyof typeof iconMap] ?? Palette;
+            const Icon = ICONS[path.icon];
 
             return (
-              <article
+              <li
                 key={path.slug}
-                className={cn(
-                  "group bg-bs-gray-50 hover:shadow-bs-card rounded-xl border border-bs-gray-100 p-4 transition-all duration-200 hover:-translate-y-1 hover:border-bs-blue-200 hover:bg-white md:p-[18px]"
-                )}
+                className="flex aspect-square flex-col items-center justify-center gap-3 rounded-3xl border border-(--bs-gray-200) bg-white"
               >
-                <div className="flex items-center gap-4">
-                  <div className="bg-bs-blue-50 text-bs-blue-800 flex h-12 w-12 items-center justify-center rounded-xl">
-                    <Icon className="h-6 w-6" strokeWidth={1.8} />
-                  </div>
-                  <div>
-                    <p className="typo-label-l text-bs-ink">{path.name}</p>
-                    <p className="text-bs-gray-500 mt-1 text-sm">
-                      Curated lessons & growth
-                    </p>
-                  </div>
-                </div>
-              </article>
+                <span className="bg-bs-lime flex size-[60px] items-center justify-center rounded-full">
+                  <Icon className="text-bs-ink size-9" />
+                </span>
+                <span className="typo-label-xl text-bs-ink">{path.name}</span>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </div>
     </section>
   );

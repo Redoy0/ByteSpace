@@ -14,7 +14,7 @@ export function CourseSection() {
   );
 
   return (
-    <section className="bg-white py-14 md:py-20 xl:py-[96px]">
+    <section className="bg-white py-14 md:py-20 xl:pt-[96px] xl:pb-[72px]">
       <div className="layout-container">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="typo-heading-s md:typo-heading-m text-bs-ink">
@@ -46,7 +46,7 @@ export function CourseSection() {
                     "rounded-full border px-3 py-1.5 text-[11px] leading-4 font-medium transition-colors",
                     active
                       ? "border-bs-lime bg-bs-lime text-bs-ink"
-                      : "bg-bs-gray-50 text-bs-gray-700 hover:text-bs-blue-800 border-bs-gray-100 hover:border-bs-blue-200"
+                      : "bg-bs-gray-50 text-bs-gray-700 hover:text-bs-blue-800 border-(--bs-gray-100) hover:border-(--bs-blue-200)"
                   )}
                 >
                   {category.name}

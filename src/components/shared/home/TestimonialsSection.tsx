@@ -1,59 +1,68 @@
 import Image from "next/image";
-import { Star } from "lucide-react";
 import { MOCK_TESTIMONIALS } from "@/data/home";
 
+/**
+ * "Discover What Our Community Is Saying"
+ * (public/images/testimonials/Testimonials_Frame.png). Body copy is the
+ * design's #4f4f4f, which has no token.
+ */
 export function TestimonialsSection() {
   return (
-    <section className="bg-white py-16 md:py-20 xl:py-[104px]">
-      <div className="layout-container">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-bs-blue-800 mb-4 text-sm font-semibold tracking-[0.22em] uppercase">
-            Community feedback
-          </p>
-          <h2 className="typo-heading-m md:typo-heading-l text-bs-ink">
-            Discover What Our
-            <br className="hidden sm:block" />
+    <section
+      aria-labelledby="testimonials-title"
+      className="bg-bs-testimonials relative isolate overflow-hidden py-16 md:py-20 xl:pt-[74px] xl:pb-[59px]"
+    >
+      {/* Figma: 1144×1132 at 842, -241 and 664×678 at 395, -138 in the 1440 frame; they follow the content */}
+      <div
+        aria-hidden="true"
+        className="bg-bs-lime-glow pointer-events-none absolute top-[-241px] left-[calc(50%_+_122px)] h-[1132px] w-[1144px]"
+      />
+      <div
+        aria-hidden="true"
+        className="bg-bs-lime-glow pointer-events-none absolute top-[-138px] left-[calc(50%_-_325px)] h-[678px] w-[664px] [--glow-alpha:0.6]"
+      />
+
+      <div className="layout-container relative">
+        <div className="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-9">
+          <h2
+            id="testimonials-title"
+            className="typo-heading-s md:typo-heading-m lg:typo-heading-s xl:typo-heading-m text-black xl:-ml-0.5"
+          >
+            Discover What Our <br className="hidden sm:block" />
             Community Is Saying
           </h2>
+          <p className="typo-body-m sm:typo-body-l text-[#4f4f4f]">
+            At ByteSpace, our vibrant community of learners and creators is at
+            the heart of what we do. Hear directly from those who have
+            experienced the transformative journey of learning and creating on
+            our platform. Explore testimonials that reflect the diverse
+            perspectives of enthusiastic learners and accomplished creators.
+          </p>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+        {/* Figma: 3×374px cards + 41px gaps = 1204px, 2px wider than the container */}
+        <div className="mt-10 grid items-start gap-6 lg:grid-cols-3 xl:-mx-0.5 xl:mt-[73px] xl:gap-[41px]">
           {MOCK_TESTIMONIALS.map((testimonial) => (
-            <article
-              key={testimonial.id}
-              className="bg-bs-gray-50 shadow-bs-card rounded-2xl border border-bs-gray-100 p-5 md:p-6"
-            >
-              <div className="flex items-center gap-3">
-                <div className="relative h-12 w-12 overflow-hidden rounded-full border border-bs-gray-200 bg-white">
-                  <Image
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    fill
-                    sizes="48px"
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <p className="text-bs-ink font-semibold">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-bs-gray-500 text-sm">{testimonial.role}</p>
-                </div>
-              </div>
-
-              <div className="text-bs-lime-700 mt-4 flex items-center gap-1">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <Star
-                    key={`${testimonial.id}-${index}`}
-                    className="h-4 w-4 fill-current"
-                  />
-                ))}
-              </div>
-
-              <p className="text-bs-gray-700 mt-4 text-base leading-7">
-                “{testimonial.quote}”
-              </p>
-            </article>
+            <figure key={testimonial.id} className="rounded-3xl bg-white p-6">
+              <figcaption>
+                <Image
+                  src={testimonial.avatar}
+                  alt=""
+                  width={80}
+                  height={80}
+                  className="size-20 rounded-full object-cover"
+                />
+                <p className="typo-heading-xs mt-6 leading-7 text-black">
+                  {testimonial.name}
+                </p>
+                <p className="typo-body-l text-bs-blue-800">
+                  {testimonial.role}
+                </p>
+              </figcaption>
+              <blockquote className="typo-body-l mt-6 text-[#4f4f4f]">
+                {`"${testimonial.quote}"`}
+              </blockquote>
+            </figure>
           ))}
         </div>
       </div>
