@@ -96,7 +96,7 @@ Copy `.env.example` to `.env` and adjust as needed. Real `.env` files are git-ig
 | Command                                   | Description                                                            |
 | ----------------------------------------- | ---------------------------------------------------------------------- |
 | `npm run dev`                             | Start the development server (Turbopack) on port 3000, loading `.env`. |
-| `npm run build`                           | Create a production build (standalone output).                         |
+| `npm run build`                           | Create a production build (standalone output, except on Vercel).       |
 | `npm run start`                           | Serve the production build, loading `.env`.                            |
 | `npm run lint` / `npm run lint:fix`       | Run ESLint, or fix what it can.                                        |
 | `npm run typecheck`                       | Type-check the project with `tsc --noEmit`.                            |
@@ -170,6 +170,7 @@ sequenceDiagram
 - The **Axios client** attaches the access token and, on a `401`, refreshes it once through `/api/auth/refresh-token` while queuing other requests.
 - **`proxy.ts`** decodes the token on each navigation: it redirects signed-in users away from `/login` and `/register`, and sends visitors to `/login?redirect=…` when they open a role area without the right role. Expired tokens are refreshed silently first.
 - **`UserProvider`** exposes the current user through `useUser()`. The root provider seeds it from the JWT on the server, and a `BroadcastChannel` keeps sign-in and sign-out in sync across tabs.
+- **Demo mode**: while `NEXT_PUBLIC_USE_MOCK_API` is on, the sign-in and sign-up forms validate and then show a demo notice instead of calling these endpoints (`lib/auth/demoAuth.ts`).
 
 ### Styling
 
@@ -200,7 +201,9 @@ docker compose up --build -d
 
 The app listens on port **3300** (set `PORT` to change the host port). `NEXT_PUBLIC_*` values are baked in as placeholders at build time and replaced when the container starts (`entrypoint.sh`), so one image can be promoted across environments.
 
-Production responses send `Cache-Control` headers that prevent stale HTML after a deploy, and the auth and dashboard routes are marked `noindex`.
+### Caching
+
+In production, pages are never cached, so a deploy never serves stale HTML. Public images and logos are cached for a day, and hashed build assets for a year. The auth and dashboard routes are marked `noindex`.
 
 ## Conventions
 
