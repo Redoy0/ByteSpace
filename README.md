@@ -39,7 +39,7 @@ The backend is a separate service. Until it is available, the app serves mock da
 ## Features
 
 - **Homepage**: hero with a course search box, featured courses filterable by category, learning paths, testimonials, a creator call to action and a footer with a newsletter form. Responsive from 375px phones to wide desktops. (The search results page and newsletter sign-up are on the [roadmap](#roadmap).)
-- **Authentication**: validated sign-in and sign-up forms, a JWT access token in a cookie, an HttpOnly refresh token, silent refresh and session sync across browser tabs.
+- **Authentication**: validated sign-in and sign-up forms, a JWT access token in a cookie, an HttpOnly refresh token, silent refresh and session sync across browser tabs. While mock mode is on, the forms run as a demo and send nothing.
 - **Route protection**: `proxy.ts` keeps signed-in users off the auth pages and guards the `/student`, `/creator` and `/admin` areas by role.
 - **Mock-first data layer**: API services switch between the real backend and mock data with one environment flag. React Query caches responses, and the course section is prefetched on the server so it renders without a loading state.
 - **Design system**: the ByteSpace palette, type scale and effects as Tailwind CSS v4 tokens, on top of shadcn/ui and Radix primitives.
@@ -57,13 +57,13 @@ The backend is a separate service. Until it is available, the app serves mock da
 | Forms     | [React Hook Form](https://react-hook-form.com/) + [Zod 4](https://zod.dev/)                                                                                     |
 | Icons     | [Hugeicons](https://hugeicons.com/), [Lucide](https://lucide.dev/), custom SVGs                                                                                 |
 | Tooling   | ESLint 9, Prettier (with the Tailwind plugin), lint-staged config (no Git hook installed yet)                                                                   |
-| Delivery  | Docker (multi-stage, Node 24 Alpine)                                                                                                                            |
+| Delivery  | Vercel, or Docker (multi-stage, Node 24 Alpine)                                                                                                                 |
 
 ## Getting started
 
 ### Prerequisites
 
-- Node.js **20.9 or later** (the Docker image uses Node 24)
+- Node.js **24** (pinned in `package.json`; 20.9+ also works locally)
 - npm 10 or later
 
 ### Installation
@@ -76,20 +76,20 @@ cp .env.example .env
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). With `NEXT_PUBLIC_USE_MOCK_API=true` (the default), no backend is needed. Sign-in and sign-up do need a running backend, because they go through the real auth endpoints.
+Open [http://localhost:3000](http://localhost:3000). With `NEXT_PUBLIC_USE_MOCK_API=true` (the default), no backend is needed: course data is mocked, and sign-in and sign-up run as a demo (the forms validate, but nothing is sent).
 
 ## Environment variables
 
 Copy `.env.example` to `.env` and adjust as needed. Real `.env` files are git-ignored.
 
-| Variable                                    | Default                     | Description                                                                                   |
-| ------------------------------------------- | --------------------------- | --------------------------------------------------------------------------------------------- |
-| `BACKEND_BASE_URL_DOMAIN`                   | `http://localhost:3000/api` | Base URL of the ByteSpace API, used by the Axios client and server-side fetches. Server-only. |
-| `NEXT_PUBLIC_APP_URL`                       | `http://localhost:3000`     | Public URL of this front end, used for metadata and canonical links.                          |
-| `NEXT_PUBLIC_USE_MOCK_API`                  | `true`                      | Serve mock data from the API layer. Set to `false` to call the backend.                       |
-| `NEXT_PUBLIC_MAINTENANCE_MODE`              | `false`                     | Parsed by `envConfig`; reserved for a maintenance screen that is not built yet.               |
-| `NEXT_PUBLIC_MAINTENANCE_COUNTDOWN_SECONDS` | `900`                       | Countdown for the maintenance screen above.                                                   |
-| `NEXT_PUBLIC_NODE_ENV`                      | —                           | Passed through the Docker build; not currently read by the app.                               |
+| Variable                                    | Default                                             | Description                                                                                   |
+| ------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `BACKEND_BASE_URL_DOMAIN`                   | `http://localhost:3000/api`                         | Base URL of the ByteSpace API, used by the Axios client and server-side fetches. Server-only. |
+| `NEXT_PUBLIC_APP_URL`                       | Vercel deployment URL, else `http://localhost:3000` | Public URL of this front end, used for metadata and canonical links.                          |
+| `NEXT_PUBLIC_USE_MOCK_API`                  | `true`                                              | Serve mock data and run sign-in and sign-up as a demo. Set to `false` to use the backend.     |
+| `NEXT_PUBLIC_MAINTENANCE_MODE`              | `false`                                             | Parsed by `envConfig`; reserved for a maintenance screen that is not built yet.               |
+| `NEXT_PUBLIC_MAINTENANCE_COUNTDOWN_SECONDS` | `900`                                               | Countdown for the maintenance screen above.                                                   |
+| `NEXT_PUBLIC_NODE_ENV`                      | —                                                   | Passed through the Docker build; not currently read by the app.                               |
 
 ## Scripts
 
@@ -178,6 +178,18 @@ sequenceDiagram
 - Components are server components by default. `"use client"` is added only where there is interactivity.
 
 ## Deployment
+
+### Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRedoy0%2FByteSpace)
+
+1. Import the repository in Vercel (**Add New → Project**). The Next.js preset is detected automatically, so the build settings can stay as they are.
+2. Add the environment variables from the table above. To deploy the front end on its own, leave `NEXT_PUBLIC_USE_MOCK_API` at `true` (mock data, demo sign-in). Once the backend is live, set it to `false` and point `BACKEND_BASE_URL_DOMAIN` at the API.
+3. Deploy. Every push to the production branch redeploys, and other branches get preview URLs.
+
+`NEXT_PUBLIC_APP_URL` can be left empty on Vercel: the app falls back to the deployment's own URL. Set it once you add a custom domain.
+
+### Docker
 
 The repository ships a multi-stage `Dockerfile` and a `docker-compose.yml`.
 

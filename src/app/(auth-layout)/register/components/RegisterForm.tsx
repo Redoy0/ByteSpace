@@ -12,6 +12,7 @@ import {
   authLabelClass,
 } from "@/components/shared/auth/authFieldStyles";
 import { Button } from "@/components/ui/button";
+import { isAuthDemo, runDemoAuth } from "@/lib/auth/demoAuth";
 import { registerRequest } from "@/lib/auth/loginRequest";
 import { getPostAuthRedirect } from "@/lib/auth/postAuthRedirect";
 import { registerSchema, type RegisterFormValues } from "@/lib/zod/authSchema";
@@ -27,6 +28,12 @@ export function RegisterForm() {
   const onSubmit = async (values: RegisterFormValues) => {
     setIsSubmitting(true);
     setFormError(null);
+
+    if (isAuthDemo) {
+      await runDemoAuth("Sign-up");
+      setIsSubmitting(false);
+      return;
+    }
 
     // The register route signs the new account in (same cookies as login)
     const res = await registerRequest(values);

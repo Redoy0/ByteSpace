@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  // Standalone output is for the Docker image; Vercel builds its own output
+  output: process.env.VERCEL ? undefined : "standalone",
   reactCompiler: true,
   allowedDevOrigins: ["*"],
 
@@ -39,6 +40,17 @@ const nextConfig: NextConfig = {
                 {
                   key: "Cache-Control",
                   value: "public, max-age=31536000, immutable",
+                },
+              ],
+            },
+            // Public images and logos keep their names across deploys, so cache
+            // them for a day and refresh in the background (overrides no-store)
+            {
+              source: "/:dir(images|logo)/:path*",
+              headers: [
+                {
+                  key: "Cache-Control",
+                  value: "public, max-age=86400, stale-while-revalidate=604800",
                 },
               ],
             },
