@@ -153,6 +153,7 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-caret-blink: caret-blink 1.25s ease-out infinite;
   --animate-float: float 6s ease-in-out infinite;
+  --animate-float-soft: float-soft 7s ease-in-out infinite;
   --animate-duration: 0.2s;
   --animate-enter-opacity: initial;
   --animate-enter-scale: initial;
@@ -630,6 +631,17 @@
   }
   50% {
     transform: translate3d(0, -10px, 0) rotate(2deg);
+  }
+}
+
+/* Idle bob for large section images — vertical only */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
   }
 }
 

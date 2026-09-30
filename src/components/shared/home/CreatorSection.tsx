@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
+import { Tilt } from "@/components/shared/motion/Tilt";
 import { CREATOR_FEATURES } from "@/data/home";
 
 /**
@@ -61,14 +62,19 @@ export function CreatorSection() {
            * the 4% nudge centres the cards rather than cards + empty margin.
            */}
           <div className="relative mx-auto aspect-[587/598] w-full max-w-[587px] max-lg:translate-x-[4%] lg:order-1">
-            <Image
-              src="/images/creatorSection/left-creator.png"
-              alt="Creator wearing a headset and holding a tablet, beside revenue cards and a Happy Students rating card"
-              width={587}
-              height={719}
-              sizes="(min-width: 1280px) 580px, (min-width: 1024px) 50vw, 587px"
-              className="absolute top-0 left-0 h-auto w-full"
-            />
+            {/* Tilts towards the mouse; the image itself bobs gently */}
+            <Tilt className="absolute inset-0">
+              <Image
+                src="/images/creatorSection/left-creator.png"
+                alt="Creator wearing a headset and holding a tablet, beside revenue cards and a Happy Students rating card"
+                width={587}
+                height={719}
+                sizes="(min-width: 1280px) 580px, (min-width: 1024px) 50vw, 587px"
+                className="motion-safe:animate-float-soft absolute top-0 left-0 h-auto w-full"
+                // Out of step with the growth image
+                style={{ animationDelay: "-3.5s" }}
+              />
+            </Tilt>
           </div>
         </div>
       </div>

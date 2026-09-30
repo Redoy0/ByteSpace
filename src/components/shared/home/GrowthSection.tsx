@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Tilt } from "@/components/shared/motion/Tilt";
 import { PLATFORM_STATS } from "@/data/home";
 
 /**
@@ -62,14 +63,17 @@ export function GrowthSection() {
            * Below lg the 6% nudge centres the cards rather than cards + shadow.
            */}
           <div className="relative mx-auto aspect-[703/551] w-full max-w-[560px] max-lg:translate-x-[6%] lg:w-[120.4%] lg:max-w-none">
-            <Image
-              src="/images/GrowthSection/Image.png"
-              alt="Smiling student holding a laptop beside a Figma course card and a 55% learning progress card"
-              width={703}
-              height={697}
-              sizes="(min-width: 1280px) 703px, (min-width: 1024px) 60vw, 560px"
-              className="absolute top-0 left-0 h-auto w-full"
-            />
+            {/* Tilts towards the mouse; the image itself bobs gently */}
+            <Tilt className="absolute inset-0">
+              <Image
+                src="/images/GrowthSection/Image.png"
+                alt="Smiling student holding a laptop beside a Figma course card and a 55% learning progress card"
+                width={703}
+                height={697}
+                sizes="(min-width: 1280px) 703px, (min-width: 1024px) 60vw, 560px"
+                className="motion-safe:animate-float-soft absolute top-0 left-0 h-auto w-full"
+              />
+            </Tilt>
           </div>
         </div>
       </div>
