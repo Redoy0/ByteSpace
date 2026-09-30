@@ -143,12 +143,24 @@
  *   Persian Blue  → bs-blue-{50…950}   primary    (brand = 800)
  *   Electric Lime → bs-lime-{50…950}   secondary  (brand = 400)
  *   Shuttle Gray  → bs-gray-{50…950}   neutrals   (ink   = 950)
+ *
+ * Border colours: write border-(--bs-gray-200), not border-bs-gray-200.
+ * Tailwind ≥4.3 also reads the latter as its logical border-bs-* (block
+ * start) utility and paints the top edge in its own gray-200.
  */
 @theme inline {
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-caret-blink: caret-blink 1.25s ease-out infinite;
   --animate-float: float 6s ease-in-out infinite;
+  --animate-float-soft: float-soft 7s ease-in-out infinite;
+  /* Drop into place, then keep floating. Stagger with [--delay:…] */
+  --animate-drop-float:
+    drop-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both,
+    float-soft 6s ease-in-out calc(var(--delay, 0s) + 0.8s) infinite;
+  --animate-drop-bob:
+    drop-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both,
+    float 5s ease-in-out calc(var(--delay, 0s) + 0.8s) infinite;
   --animate-duration: 0.2s;
   --animate-enter-opacity: initial;
   --animate-enter-scale: initial;
@@ -208,6 +220,7 @@
   --color-bs-blue: var(--bs-blue-800);
   --color-bs-lime: var(--bs-lime-400);
   --color-bs-ink: var(--bs-gray-950);
+  --color-bs-navy: var(--bs-navy);
 
   /* Effect styles (Figma "A" / "B") */
   --shadow-bs-float: var(--bs-shadow-a);
@@ -283,6 +296,9 @@
   --bs-gray-900: #3a3b3f;
   --bs-gray-950: #242528;
 
+  /* Section headings ("ByteSpace Navy") */
+  --bs-navy: #040819;
+
   /* Effect style "A" — large soft float (hero / growth imagery) */
   --bs-shadow-a:
     -0.26px 8px 3.56px 0 #00000003, -1.1px 24px 6.71px 0 #00000006,
@@ -348,6 +364,11 @@
   h3,
   h4 {
     @apply font-heading;
+  }
+  /* Tailwind v4's preflight gives buttons the default arrow cursor */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
   }
 }
 
@@ -536,21 +557,70 @@
     }
   }
 
-  /* Soft lime / blue glows behind the growth, creator and testimonial sections */
-  .bg-bs-glow {
+  /*
+   * The growth and creator sections read as one canvas. The blue glow on the
+   * left straddles the seam, so both halves use the same size and centre.
+   */
+  .bg-bs-growth {
     background-color: #f7f8fa;
     background-image:
       radial-gradient(
-        38% 55% at 28% 18%,
-        rgb(212 251 32 / 0.38),
-        transparent 70%
-      ),
-      radial-gradient(
-        40% 55% at 4% 100%,
-        rgb(0 59 226 / 0.16),
+        circle 600px at 60px calc(100% + 49px),
+        rgb(0 59 226 / 0.14),
         transparent 70%
       ),
       radial-gradient(35% 45% at 100% 8%, rgb(0 59 226 / 0.1), transparent 70%);
+  }
+  .bg-bs-creator {
+    background-color: #f7f8fa;
+    background-image:
+      radial-gradient(
+        circle 600px at 60px 49px,
+        rgb(0 59 226 / 0.14),
+        transparent 70%
+      ),
+      radial-gradient(
+        630px 580px at calc(100% - 140px) calc(100% - 100px),
+        rgb(0 59 226 / 0.21),
+        transparent 70%
+      );
+  }
+
+  /* Testimonials canvas: blue glow bottom-left; the lime glows are .bg-bs-lime-glow */
+  .bg-bs-testimonials {
+    background-color: #fafafa;
+    background-image: radial-gradient(
+      600px 650px at 125px calc(100% - 54px),
+      rgb(0 59 226 / 0.21),
+      transparent 70%
+    );
+  }
+
+  /*
+   * 404 numerals: lime that eases into the page blue towards the baseline.
+   * Stops are % of a leading-none line box.
+   */
+  .text-lime-fade {
+    background: linear-gradient(
+      180deg,
+      var(--bs-lime-400) 22%,
+      #acd745 50%,
+      #72a379 71%,
+      #4c809c 85%
+    );
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Soft lime radial glow. --glow-alpha sets the centre strength (0.4 default) */
+  .bg-bs-lime-glow {
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgb(203 252 1 / var(--glow-alpha, 0.4)) 0%,
+      rgb(203 252 1 / calc(var(--glow-alpha, 0.4) * 0.23)) 53%,
+      rgb(203 252 1 / calc(var(--glow-alpha, 0.4) * 0.06)) 75%,
+      rgb(203 252 1 / 0) 100%
+    );
   }
 
   .hide-scroll {
@@ -569,6 +639,29 @@
   }
   50% {
     transform: translate3d(0, -10px, 0) rotate(2deg);
+  }
+}
+
+/* Uses translate (not transform) so it can run alongside a float animation */
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    translate: 0 -32px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Idle bob for large section images — vertical only */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
   }
 }
 
@@ -592,14 +685,4 @@ input[type="search"]::-webkit-search-cancel-button {
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
   display: none;
-}
-
-.growth-layout {
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 768px) {
-  .growth-layout {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  }
 }

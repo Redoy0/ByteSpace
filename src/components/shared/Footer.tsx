@@ -1,123 +1,125 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Mail,
-  Youtube,
-} from "lucide-react";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 import { Button } from "@/components/ui/button";
-import { ByteSpaceLogo } from "@/components/icons/svgIcons";
 import { PUBLIC_ROUTES } from "@/constant/routes";
+import { cn } from "@/lib/utils";
 
-const footerGroups = {
-  navigation: [
-    { label: "Home", href: PUBLIC_ROUTES.home },
-    { label: "Courses", href: PUBLIC_ROUTES.courses },
-    { label: "Creators", href: PUBLIC_ROUTES.creators },
-    { label: "Support", href: "/support" },
+const category = (slug: string) => `${PUBLIC_ROUTES.courses}?category=${slug}`;
+
+const LINK_COLUMNS = [
+  [
+    { label: "Featured Courses", href: PUBLIC_ROUTES.courses },
+    { label: "Featured Categories", href: PUBLIC_ROUTES.courses },
+    { label: "Business", href: category("business") },
+    { label: "IT", href: category("it-software") },
+    { label: "Design", href: category("design") },
   ],
-  company: [
+  [
+    { label: "Development", href: category("development") },
+    { label: "Marketing", href: category("marketing") },
+    { label: "Photography", href: category("photography") },
+    { label: "Finance", href: category("finance") },
+    { label: "Sport", href: category("sport") },
+  ],
+  [
+    { label: "Become a Creator", href: PUBLIC_ROUTES.creators },
+    { label: "Affiliate Program", href: "/affiliate" },
+    { label: "Contact", href: "/contact" },
+    { label: "Help", href: "/help" },
     { label: "About", href: "/about" },
-    { label: "Careers", href: "/careers" },
-    { label: "Blog", href: "/blog" },
-    { label: "Legal", href: "/legal" },
   ],
-};
-
-const socials = [
-  { label: "Facebook", href: "#", icon: Facebook },
-  { label: "Instagram", href: "#", icon: Instagram },
-  { label: "LinkedIn", href: "#", icon: Linkedin },
-  { label: "YouTube", href: "#", icon: Youtube },
 ];
+
+const LEGAL_LINKS = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "Cookies Settings", href: "/cookies" },
+];
+
+const linkClass =
+  "rounded-sm transition-colors hover:text-bs-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bs-blue-800";
 
 export function Footer() {
   return (
-    <footer className="bg-bs-gray-950 text-bs-gray-100">
-      <div className="layout-container py-14 md:py-16">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr] lg:gap-8">
+    <footer className="text-bs-ink border-t border-(--bs-gray-200) bg-white">
+      <div className="layout-container pt-12 pb-10 md:pt-18 md:pb-12">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-10">
           <div>
-            <ByteSpaceLogo tone="light" className="h-8 md:h-9" />
-            <p className="text-bs-gray-300 mt-5 max-w-sm text-sm leading-7">
-              Learn new skills, grow your confidence, and build real momentum
-              with expert-led learning experiences designed for modern creators
-              and teams.
+            <Link
+              href={PUBLIC_ROUTES.home}
+              aria-label="ByteSpace home"
+              className={cn("inline-block", linkClass)}
+            >
+              <BrandLogo />
+            </Link>
+            <p className="typo-body-s mt-2.5">
+              Stay Up to date with our latest features and releases by joining
+              our newsletter.
             </p>
 
-            <div className="mt-6 flex items-center gap-3">
-              {socials.map(({ label, href, icon: Icon }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="text-bs-gray-200 hover:border-bs-lime hover:text-bs-lime flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-colors"
-                >
-                  <Icon className="h-4 w-4" />
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="typo-label-l text-white">Navigate</h3>
-            <ul className="text-bs-gray-300 mt-4 space-y-3 text-sm">
-              {footerGroups.navigation.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="transition-colors hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="typo-label-l text-white">Company</h3>
-            <ul className="text-bs-gray-300 mt-4 space-y-3 text-sm">
-              {footerGroups.company.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="transition-colors hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="typo-label-l text-white">Stay in the loop</h3>
-            <div className="mt-4 flex items-center gap-2 rounded-full border border-white/10 bg-white/5 p-2">
-              <div className="text-bs-gray-300 flex items-center gap-2 pl-2">
-                <Mail className="h-4 w-4" />
-                <input
-                  aria-label="Email address"
-                  type="email"
-                  placeholder="Email address"
-                  className="placeholder:text-bs-gray-400 w-full bg-transparent text-sm text-white focus:outline-none"
-                />
-              </div>
+            {/* The form row's width also sets where the disclaimer wraps */}
+            <div className="mt-11 flex max-w-125 items-start gap-3 sm:gap-6">
+              <input
+                type="email"
+                aria-label="Email address"
+                placeholder="Enter your email"
+                autoComplete="email"
+                className="typo-body-m placeholder:text-bs-ink focus-visible:ring-bs-blue-800/20 h-13 min-w-0 flex-1 rounded-full border border-(--bs-gray-200) bg-white px-6 outline-none focus-visible:border-(--bs-blue-800) focus-visible:ring-4"
+              />
               <Button
                 type="button"
                 variant="lime"
-                size="sm"
-                className="rounded-full px-4"
+                size="pill-md"
+                className="shrink-0"
               >
-                <ArrowRight className="h-4 w-4" />
+                Search
               </Button>
             </div>
+            <p className="typo-body-xs mt-6 max-w-125">
+              By subscribing, you agree to our Privacy Policy and consent to
+              receive updates from our company.
+            </p>
           </div>
+
+          <nav
+            aria-label="Footer"
+            className="grid grid-cols-2 gap-x-10 gap-y-4 sm:grid-cols-3 lg:pt-12"
+          >
+            {LINK_COLUMNS.map((links, i) => (
+              <ul
+                key={links[0].label}
+                className={cn(
+                  "typo-body-s flex flex-col gap-4 leading-5.5",
+                  // phones: 2 columns, so the last list spreads across both
+                  i === LINK_COLUMNS.length - 1 &&
+                    "max-sm:col-span-2 max-sm:grid max-sm:grid-cols-2 max-sm:gap-x-10"
+                )}
+              >
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <Link href={link.href} className={linkClass}>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </nav>
         </div>
 
-        <div className="text-bs-gray-400 mt-10 border-t border-white/10 pt-6 text-sm">
-          © 2026 ByteSpace. All rights reserved.
+        <div className="mt-16 flex flex-col gap-3 border-t border-(--bs-gray-200) pt-6 sm:flex-row sm:items-center sm:justify-between lg:mt-32">
+          <p className="typo-body-xs">
+            © {new Date().getFullYear()} ByteSpace. All rights reserved.
+          </p>
+          <ul className="typo-body-xs flex flex-wrap gap-x-6 gap-y-2">
+            {LEGAL_LINKS.map((link) => (
+              <li key={link.label}>
+                <Link href={link.href} className={linkClass}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

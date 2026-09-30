@@ -9,9 +9,9 @@ import { HAPPY_STUDENT_AVATARS, HERO_HIGHLIGHTS } from "@/data/home";
 import { cn } from "@/lib/utils";
 
 /*
- * The stage is the student's bounding box (509.5×475 at 1440px). The lime
- * arc and floating cards are positioned in % of that box, so the whole
- * composition resizes by changing --w; --k scales the cards to match.
+ * The stage is the student's bounding box. The lime arc and floating cards
+ * are positioned in % of it, so the whole composition resizes by changing
+ * --w; --k scales the cards to match.
  *
  * No transforms/z-index on the stage itself: the arc, the section's 3D
  * decorations, the student and the cards must share one stacking context
@@ -26,7 +26,7 @@ export function HeroVisual({ className }: { className?: string }) {
 
   return (
     <div className={cn(stage, className)}>
-      {/* Lime arc — a 1150px circle (centre x = 729.5 in the design), cut by the section */}
+      {/* Lime arc: a large circle behind the student, cut off by the section */}
       <div
         aria-hidden="true"
         className="bg-bs-lime-500 absolute top-[7.37%] left-[-67.71%] z-0 aspect-square w-[225.7%] rounded-full"

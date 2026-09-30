@@ -2,7 +2,7 @@ import { PlaceholderLogo } from "@/components/icons/svgIcons";
 import { PLACEHOLDER_LOGOS } from "@/data/home";
 
 /**
- * Light logo strip under the hero (ui/Landing/Frame 2.png).
+ * Light logo strip under the hero.
  *
  * The logos are placeholders, so the strip is decorative and hidden from
  * assistive tech. When real partner logos arrive, render them as a list of

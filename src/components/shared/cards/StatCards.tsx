@@ -3,12 +3,11 @@ import { StarFilledIcon } from "@/components/icons/svgIcons";
 import { cn } from "@/lib/utils";
 
 /*
- * Small white "floating" info cards used over imagery in the hero, growth
- * and creator sections. Sizes follow the design frames (e.g. 208×70,
- * 232×130, 257×120) and they contain only presentational data.
+ * Small "floating" info cards used over imagery (hero, auth pages).
+ * Presentational only.
  */
 
-const floatingCard = "rounded-[16px] bg-white text-bs-ink";
+const floatingCard = "rounded-2xl bg-white text-bs-ink";
 
 interface CategoryHighlightCardProps {
   title: string;
@@ -87,6 +86,8 @@ interface HappyStudentsCardProps {
   totalLabel: string;
   title?: string;
   className?: string;
+  /** "lime": lime card with a blue star and dark count bubble (auth pages). */
+  variant?: "white" | "lime";
 }
 
 /** "Happy Students 4.5 (240) ★" + avatar stack ending in "2K+". */
@@ -98,9 +99,19 @@ export function HappyStudentsCard({
   totalLabel,
   title = "Happy Students",
   className,
+  variant = "white",
 }: HappyStudentsCardProps) {
+  const lime = variant === "lime";
+
   return (
-    <div className={cn(floatingCard, "w-[257px] p-4", className)}>
+    <div
+      className={cn(
+        floatingCard,
+        "w-[257px] p-4",
+        lime && "bg-bs-lime",
+        className
+      )}
+    >
       <p className="typo-label-m">{title}</p>
       <p className="typo-body-xs mt-0.5 flex items-center gap-1 leading-none">
         <span className="sr-only">Rated</span>
@@ -109,13 +120,19 @@ export function HappyStudentsCard({
           ({reviews}
           <span className="sr-only"> reviews</span>)
         </span>
-        <StarFilledIcon className="text-bs-lime size-3.5" />
+        <StarFilledIcon
+          className={cn("size-3.5", lime ? "text-bs-blue" : "text-bs-lime")}
+        />
       </p>
       <AvatarStack
         avatars={avatars}
         overflowLabel={total}
         label={totalLabel}
         className="mt-2.5"
+        overflowClassName={cn(
+          "typo-label-s font-semibold",
+          lime && "bg-bs-ink text-white"
+        )}
       />
     </div>
   );

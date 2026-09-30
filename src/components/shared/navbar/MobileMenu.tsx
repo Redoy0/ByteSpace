@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Menu01Icon } from "@hugeicons/core-free-icons";
-import { ByteSpaceLogo } from "@/components/icons/svgIcons";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -41,10 +41,10 @@ export function MobileMenu() {
           Site navigation and account links
         </SheetDescription>
 
-        <div className="flex h-18 items-center border-b border-bs-gray-100 px-5">
+        <div className="flex h-18 items-center border-b border-(--bs-gray-100) px-5">
           <SheetClose asChild>
             <Link href="/" aria-label="ByteSpace home">
-              <ByteSpaceLogo className="h-7" />
+              <BrandLogo className="h-7.5" />
             </Link>
           </SheetClose>
         </div>
@@ -82,7 +82,7 @@ export function MobileMenu() {
           </ul>
         </nav>
 
-        <div className="mt-auto border-t border-bs-gray-100 p-5">
+        <div className="mt-auto border-t border-(--bs-gray-100) p-5">
           {user ? (
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3">
