@@ -30,6 +30,11 @@ export const getAppBaseUrl = () => {
     return process.env.NEXT_PUBLIC_APP_URL;
   }
 
+  // On Vercel, fall back to the deployment's own URL (production domain first)
+  const vercelHost =
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+  if (vercelHost) return `https://${vercelHost}`;
+
   return "http://localhost:3000";
 };
 
