@@ -12,6 +12,8 @@ interface CourseCardProps {
   className?: string;
   /** Eager-load the thumbnail (first row above the fold). */
   priority?: boolean;
+  /** "showcase": the auth-page illustration's colours (lime star, dark count bubble). */
+  variant?: "default" | "showcase";
 }
 
 const formatDuration = (minutes: number) => {
@@ -27,7 +29,13 @@ const formatDuration = (minutes: number) => {
  * 24px radius, 1px gray-200 border, 16px inset; 341×196 thumbnail with
  * frosted meta pills; Poppins title; level pill + learner avatars; price.
  */
-export function CourseCard({ course, className, priority }: CourseCardProps) {
+export function CourseCard({
+  course,
+  className,
+  priority,
+  variant = "default",
+}: CourseCardProps) {
+  const showcase = variant === "showcase";
   const avatars = course.learnerAvatars.slice(0, 4);
   const more = Math.max(0, course.learnerCount - avatars.length);
   const meta = [
@@ -84,7 +92,12 @@ export function CourseCard({ course, className, priority }: CourseCardProps) {
         <p className="text-bs-gray-700 mt-[5px] mr-[3px] flex shrink-0 items-center gap-[3px] text-[17px] leading-none">
           <span className="sr-only">Rated</span>
           {course.rating.toFixed(1)}
-          <StarRoundedIcon className="text-bs-gray-200 size-5" />
+          <StarRoundedIcon
+            className={cn(
+              "size-5",
+              showcase ? "text-bs-lime" : "text-bs-gray-200"
+            )}
+          />
         </p>
       </div>
 
@@ -102,7 +115,10 @@ export function CourseCard({ course, className, priority }: CourseCardProps) {
           size={32}
           overlap={8}
           overflowLabel={`${more}+`}
-          overflowClassName="text-[11px] font-medium"
+          overflowClassName={cn(
+            "text-[11px] font-medium",
+            showcase && "bg-bs-ink text-white"
+          )}
           label={`${course.learnerCount} learners enrolled`}
         />
       </div>

@@ -353,6 +353,11 @@
   h4 {
     @apply font-heading;
   }
+  /* Tailwind v4's preflight gives buttons the default arrow cursor */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
 }
 
 /* ─── Text styles (Figma: Heading / Body / Label) ───────────────────────
@@ -579,6 +584,23 @@
       rgb(0 59 226 / 0.21),
       transparent 70%
     );
+  }
+
+  /*
+   * 404 numerals (ui/404.png): lime easing into the page blue towards the
+   * baseline. Stops are lime→blue-800 mixes sampled from the design, in % of
+   * a leading-none line box.
+   */
+  .text-lime-fade {
+    background: linear-gradient(
+      180deg,
+      var(--bs-lime-400) 22%,
+      #acd745 50%,
+      #72a379 71%,
+      #4c809c 85%
+    );
+    background-clip: text;
+    color: transparent;
   }
 
   /* Figma's lime glow ellipse. --glow-alpha is the peak: 0.4 (default) or 0.6 */

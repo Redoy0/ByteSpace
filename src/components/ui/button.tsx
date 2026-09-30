@@ -30,7 +30,8 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         // ByteSpace
-        lime: "bg-bs-lime text-bs-ink hover:bg-bs-lime-500 active:bg-bs-lime-500",
+        // Lifts on hover, presses back down on click (motion-safe only)
+        lime: "bg-bs-lime text-bs-ink hover:bg-bs-lime-500 hover:shadow-[0_10px_22px_-10px_rgb(36_37_40/0.45)] active:bg-bs-lime-500 active:shadow-none motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.98]",
         white: "bg-white text-bs-ink hover:bg-white/90",
         "ghost-light": "text-white hover:bg-white/10",
       },

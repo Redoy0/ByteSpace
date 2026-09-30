@@ -11,7 +11,7 @@ import { PLACEHOLDER_LOGOS } from "@/data/home";
 export function LogoCloud() {
   return (
     <section aria-hidden="true" className="bg-bs-gray-50">
-      <div className="layout-container py-10 md:py-14 xl:py-20">
+      <div className="layout-container py-10 md:py-14 xl:py-[81px]">
         <ul className="text-bs-gray-400 flex flex-wrap items-center justify-center gap-x-6 gap-y-5 sm:gap-x-5 md:flex-nowrap md:gap-x-7 lg:gap-x-10 xl:gap-x-[70px]">
           {PLACEHOLDER_LOGOS.map((mark) => (
             <li key={mark}>

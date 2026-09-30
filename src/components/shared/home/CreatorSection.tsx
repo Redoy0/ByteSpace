@@ -11,7 +11,7 @@ export function CreatorSection() {
   return (
     <section
       aria-labelledby="creator-title"
-      className="bg-bs-creator relative isolate overflow-hidden pt-8 pb-16 md:pb-20 xl:pb-[120px]"
+      className="bg-bs-creator relative isolate overflow-hidden pt-8 pb-16 md:pb-20 xl:pb-[127px]"
     >
       {/*
        * Figma: 664×678 at -287, 946 in the 1460px frame, i.e. 164px past the

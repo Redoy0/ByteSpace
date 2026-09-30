@@ -43,14 +43,17 @@ export function TestimonialsSection() {
         {/* Figma: 3×374px cards + 41px gaps = 1204px, 2px wider than the container */}
         <div className="mt-10 grid items-start gap-6 lg:grid-cols-3 xl:-mx-0.5 xl:mt-[73px] xl:gap-[41px]">
           {MOCK_TESTIMONIALS.map((testimonial) => (
-            <figure key={testimonial.id} className="rounded-3xl bg-white p-6">
+            <figure
+              key={testimonial.id}
+              className="group rounded-3xl bg-white p-6 transition-[translate,box-shadow] duration-300 ease-out hover:shadow-[0_24px_48px_-24px_rgb(0_59_226/0.35)] motion-safe:hover:-translate-y-1.5"
+            >
               <figcaption>
                 <Image
                   src={testimonial.avatar}
                   alt=""
                   width={80}
                   height={80}
-                  className="size-20 rounded-full object-cover"
+                  className="ring-bs-lime/0 group-hover:ring-bs-lime size-20 rounded-full object-cover ring-4 transition-[box-shadow,scale] duration-300 motion-safe:group-hover:scale-105"
                 />
                 <p className="typo-heading-xs mt-6 leading-7 text-black">
                   {testimonial.name}

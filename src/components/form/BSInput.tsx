@@ -71,6 +71,7 @@ const BSInput = React.forwardRef<HTMLInputElement, UInputProps>(
       errorMessageWidth,
       hideMessage,
       isUpperCase = false,
+      autoComplete,
     }: UInputProps,
     ref
   ) => {
@@ -121,6 +122,7 @@ const BSInput = React.forwardRef<HTMLInputElement, UInputProps>(
                     name={name}
                     type={showPassword ? "text" : "password"}
                     placeholder={placeholder}
+                    autoComplete={autoComplete}
                     disabled={disabled || loading}
                     accept={accept}
                     onChange={field.onChange}
@@ -144,6 +146,7 @@ const BSInput = React.forwardRef<HTMLInputElement, UInputProps>(
                   mask={mask}
                   replacement={maskReplacement}
                   placeholder={placeholder}
+                  autoComplete={autoComplete}
                   disabled={disabled || loading}
                   ref={ref}
                 />
@@ -170,6 +173,7 @@ const BSInput = React.forwardRef<HTMLInputElement, UInputProps>(
                     name={name}
                     type={type}
                     placeholder={placeholder}
+                    autoComplete={autoComplete}
                     disabled={disabled || loading}
                     accept={accept}
                     maxLength={max}
@@ -200,6 +204,7 @@ const BSInput = React.forwardRef<HTMLInputElement, UInputProps>(
                     name={name}
                     type={type}
                     placeholder={placeholder}
+                    autoComplete={autoComplete}
                     disabled={disabled || loading}
                     onChange={(e) => {
                       if (shouldFormatPhoneNumber) {

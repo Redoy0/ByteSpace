@@ -13,9 +13,9 @@ import { NavLinks } from "./NavLinks";
  * Desktop matches the 120px header in ui/landing/Header_Frame.png;
  * below md it collapses to logo + cart + drawer menu.
  */
-export default function Navbar() {
+export default function Navbar({ overlay }: { overlay?: boolean }) {
   return (
-    <NavbarShell>
+    <NavbarShell overlay={overlay}>
       <div className="layout-container grid h-18 grid-cols-[1fr_auto] items-center gap-4 md:h-[120px] md:grid-cols-[1fr_auto_1fr]">
         <Link
           href={PUBLIC_ROUTES.home}

@@ -26,7 +26,7 @@ export function HeroSection() {
           Unlock your creativity, gain valuable knowledge, and grow your
           business with our wide range of courses.
         </p>
-        <HeroSearch className="mt-8 lg:mt-[62px]" />
+        <HeroSearch className="mt-8 lg:mt-[60px]" />
       </div>
 
       <HeroVisual className="mt-10 lg:mt-[35px]" />
