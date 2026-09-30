@@ -12,6 +12,7 @@ import {
   authLabelClass,
 } from "@/components/shared/auth/authFieldStyles";
 import { Button } from "@/components/ui/button";
+import { isAuthDemo, runDemoAuth } from "@/lib/auth/demoAuth";
 import { loginRequest } from "@/lib/auth/loginRequest";
 import { getPostAuthRedirect } from "@/lib/auth/postAuthRedirect";
 import { loginSchema, type LoginFormValues } from "@/lib/zod/authSchema";
@@ -27,6 +28,12 @@ export function LoginForm() {
   const onSubmit = async (values: LoginFormValues) => {
     setIsSubmitting(true);
     setFormError(null);
+
+    if (isAuthDemo) {
+      await runDemoAuth("Sign-in");
+      setIsSubmitting(false);
+      return;
+    }
 
     const res = await loginRequest(values);
     if (!res.success) {
