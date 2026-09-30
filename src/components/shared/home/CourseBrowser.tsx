@@ -6,14 +6,14 @@ import { useCategories, useCourses } from "@/hooks/useCourses";
 import { cn } from "@/lib/utils";
 import { CourseCard } from "./CourseCard";
 
-// From 1280px the chips break into the design's three rows; plain wrapping
-// would pull "Productivity" up onto the second one.
+// From xl the chips break into three fixed rows; plain wrapping would pull
+// "Productivity" up onto the second one.
 const XL_ROW_BREAKS_AFTER = new Set(["creative-marketing", "photography"]);
 
 const chipClass =
-  "mx-2 my-[10.5px] inline-flex h-[43px] items-center rounded-full px-[18px] align-top text-base leading-none transition-[background-color,color,box-shadow,translate,scale] duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bs-blue-800 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.97]";
+  "mx-2 my-2.5 inline-flex h-11 items-center rounded-full px-4.5 align-top text-base leading-none transition-[background-color,color,box-shadow,translate,scale] duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bs-blue-800 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.97]";
 
-/** Category chips + the course grid they filter (ui/HomePage.png). */
+/** Category chips and the course grid they filter. */
 export function CourseBrowser() {
   const [category, setCategory] = useState(FEATURED_CATEGORY.slug);
   const [showAll, setShowAll] = useState(false);
@@ -37,11 +37,11 @@ export function CourseBrowser() {
   return (
     <>
       {/* flow-root keeps the chips' negative margin from collapsing into mt */}
-      <div className="mt-8 flow-root md:mt-[42px]">
+      <div className="mt-8 flow-root md:mt-10">
         <div
           role="group"
           aria-label="Course categories"
-          className="-my-[10.5px] text-center leading-none"
+          className="-my-2.5 text-center leading-none"
         >
           {visible.map((c) => {
             const active = c.slug === category;
@@ -73,7 +73,7 @@ export function CourseBrowser() {
               type="button"
               aria-expanded={showAll}
               onClick={() => setShowAll((v) => !v)}
-              className="group text-bs-blue-800 hover:text-bs-blue-600 focus-visible:outline-bs-blue-800 mx-2 my-[10.5px] inline-flex h-[43px] items-center gap-1 rounded-full align-top text-base leading-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="group text-bs-blue-800 hover:text-bs-blue-600 focus-visible:outline-bs-blue-800 mx-2 my-2.5 inline-flex h-11 items-center gap-1 rounded-full align-top text-base leading-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               <span
                 aria-hidden="true"
@@ -90,19 +90,19 @@ export function CourseBrowser() {
       </div>
 
       {isError ? (
-        <p className="typo-body-l text-bs-gray-500 mt-12 text-center xl:mt-[77px]">
+        <p className="typo-body-l text-bs-gray-500 mt-12 text-center xl:mt-19">
           We couldn&apos;t load courses right now. Please try again shortly.
         </p>
       ) : courses.length === 0 && !isFetching ? (
-        <div className="typo-body-l text-bs-gray-500 mt-12 flex min-h-[384px] items-center justify-center rounded-[24px] border border-dashed border-(--bs-gray-200) px-6 text-center xl:mt-[77px]">
+        <div className="typo-body-l text-bs-gray-500 mt-12 flex min-h-96 items-center justify-center rounded-3xl border border-dashed border-(--bs-gray-200) px-6 text-center xl:mt-19">
           No {activeName} courses yet. Check back soon!
         </div>
       ) : (
-        // 3 columns only from 1280px, where cards reach the design's 373px
+        // Three columns only from xl, where the cards have room
         <div
           aria-busy={isFetching}
           className={cn(
-            "mt-12 grid grid-cols-1 gap-6 transition-opacity duration-200 md:grid-cols-2 xl:mt-[77px] xl:grid-cols-3 xl:gap-10",
+            "mt-12 grid grid-cols-1 gap-6 transition-opacity duration-200 md:grid-cols-2 xl:mt-19 xl:grid-cols-3 xl:gap-10",
             isPlaceholderData && "opacity-60"
           )}
         >

@@ -4,9 +4,7 @@ import {
 } from "@/components/shared/decorations/FloatingShapes";
 import { Button } from "@/components/ui/button";
 
-// Matched against ui/Landing/CTA_Frame.png (1440×488). w/h are the rendered
-// size: decorations/ pyramid + cylinder are 2x exports, Cta/ files are 1x with
-// transparent padding.
+// w/h are the rendered size (some files are 2x exports or carry padding).
 const SHAPES: FloatingShape[] = [
   {
     src: "/images/decorations/lime-spiral.png",
@@ -86,16 +84,15 @@ const SHAPES: FloatingShape[] = [
   },
 ];
 
-/** "Unlock Your Potential as a Creator" banner (ui/Landing/CTA_Frame.png). */
 export function CreatorCTASection() {
   return (
     <section
       aria-labelledby="creator-cta-title"
-      className="bg-bs-grid relative isolate overflow-hidden py-16 [--grid-y:-2px] md:py-20 xl:pt-[86px] xl:pb-[84px]"
+      className="bg-bs-grid relative isolate overflow-hidden py-16 md:py-20 xl:py-21"
     >
       <FloatingShapes shapes={SHAPES} />
 
-      <div className="layout-container relative z-[2] text-center">
+      <div className="layout-container relative z-2 text-center">
         <h2
           id="creator-cta-title"
           className="typo-heading-s md:typo-heading-m text-bs-gray-50"
@@ -103,7 +100,7 @@ export function CreatorCTASection() {
           Unlock Your Potential as a <br className="hidden sm:block" />
           Creator with ByteSpace
         </h2>
-        <p className="typo-body-m sm:typo-body-l text-bs-gray-50 mx-auto mt-6 max-w-[962px] md:mt-10">
+        <p className="typo-body-m sm:typo-body-l text-bs-gray-50 mx-auto mt-6 max-w-[965px] md:mt-10">
           Experience the collaboration of numerous creators and an expanding
           selection of courses. Register now and become a part of a community
           comprising over 10,000 local and international creators. Utilize our
@@ -114,8 +111,8 @@ export function CreatorCTASection() {
           <Button
             type="button"
             variant="lime"
-            size="pill"
-            className="h-[46px] text-lg leading-[1.2] font-medium"
+            size="pill-md"
+            className="font-medium"
           >
             Join as Creator
           </Button>

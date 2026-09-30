@@ -8,13 +8,10 @@ const PROVIDERS = [
   { name: "Google", Icon: GoogleIcon },
 ];
 
-/**
- * "or" divider + Facebook / Google buttons (ui/Login.png). The backend has
- * no social sign-in yet, so the buttons only say so.
- */
+// There's no social sign-in on the backend yet, so these only say so.
 export function SocialAuthButtons() {
   return (
-    <div className="mt-12 lg:mt-[75px]">
+    <div className="mt-12 lg:mt-19">
       <div className="typo-body-m text-bs-gray-400 flex items-center gap-3">
         <span className="bg-bs-gray-200 h-px flex-1" />
         or
@@ -28,7 +25,7 @@ export function SocialAuthButtons() {
             type="button"
             aria-label={`Continue with ${name}`}
             onClick={() => toast.info(`${name} sign-in isn't available yet.`)}
-            className="hover:bg-bs-gray-50 focus-visible:outline-bs-blue-800 flex size-[72px] items-center justify-center rounded-3xl border border-(--bs-gray-200) text-black transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+            className="hover:bg-bs-gray-50 focus-visible:outline-bs-blue-800 flex size-18 items-center justify-center rounded-3xl border border-(--bs-gray-200) text-black transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             <Icon className="size-10" />
           </button>

@@ -1,10 +1,7 @@
 import type { Course } from "@/types/course";
 import { MOCK_COURSES } from "./courses";
 
-/**
- * Sample cards in the sign-in / sign-up illustration (ui/Login.png): the
- * back card, then the front card. Decorative only — not a live catalogue.
- */
+/** Cards shown in the auth-page illustration (back, then front). Decorative only. */
 export const AUTH_SHOWCASE_COURSES: Course[] = [
   "build-digital-asset",
   "the-power-of-big-data",

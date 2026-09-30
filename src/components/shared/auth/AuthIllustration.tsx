@@ -8,10 +8,10 @@ import { cn } from "@/lib/utils";
 const DONUT = "/images/decorations/white-donut.png";
 
 /*
- * Left-hand collage on the sign-in / sign-up pages (ui/Login.png): two course
- * cards, the Happy Students card and 3D shapes, positioned in design px
- * inside a 496×557 box. Purely decorative, so it's hidden from assistive
- * tech and inert (the cards' links and buttons can't be reached).
+ * Decorative collage beside the auth forms: two course cards, the Happy
+ * Students card and a few 3D shapes, absolutely positioned in a fixed box.
+ * Hidden from assistive tech and inert, so the cards' links can't be focused.
+ * Each piece drops in on a stagger, then keeps floating.
  */
 export function AuthIllustration({ className }: { className?: string }) {
   const [backCourse, frontCourse] = AUTH_SHOWCASE_COURSES;
@@ -29,19 +29,19 @@ export function AuthIllustration({ className }: { className?: string }) {
         course={backCourse}
         variant="showcase"
         priority
-        className="absolute top-[90px] left-0 w-[373px]"
+        className="motion-safe:animate-drop-float absolute top-[90px] left-0 w-[373px]"
       />
       <CourseCard
         course={frontCourse}
         variant="showcase"
         priority
-        className="absolute top-0 left-[111px] w-[373px]"
+        className="motion-safe:animate-drop-float absolute top-0 left-[111px] w-[373px] [--delay:0.12s]"
       />
       <HappyStudentsCard
         avatars={HAPPY_STUDENT_AVATARS}
         {...HERO_HIGHLIGHTS.happyStudents}
         variant="lime"
-        className="absolute top-[435px] left-[226px]"
+        className="motion-safe:animate-drop-float absolute top-[435px] left-[226px] [--delay:0.24s]"
       />
 
       <Image
@@ -50,11 +50,11 @@ export function AuthIllustration({ className }: { className?: string }) {
         width={116}
         height={122}
         priority
-        className="absolute top-[350px] left-[378px]"
+        className="motion-safe:animate-drop-bob absolute top-[350px] left-[378px] [--delay:0.4s]"
       />
 
       {/* No lime ring asset yet: the white donut, tinted lime with its shading kept */}
-      <div className="absolute top-10 left-[50px] isolate h-[93px] w-[101px]">
+      <div className="motion-safe:animate-drop-bob absolute top-10 left-[50px] isolate h-[93px] w-[101px] [--delay:0.32s]">
         <div
           className="bg-bs-lime absolute inset-0"
           style={{ mask: `url(${DONUT}) center / contain no-repeat` }}
@@ -75,7 +75,7 @@ export function AuthIllustration({ className }: { className?: string }) {
         width={125}
         height={138}
         priority
-        className="absolute top-[419px] left-0"
+        className="motion-safe:animate-drop-bob absolute top-[419px] left-0 [--delay:0.48s]"
       />
     </div>
   );

@@ -16,10 +16,8 @@ interface AuthShellProps {
 }
 
 /**
- * Sign-in / sign-up page frame (ui/Login.png, ui/Register.png): logo mark,
- * intro copy and illustration on the left, a 580×784 white card on the right.
- * At 1024px tall the card sits 120px from top and bottom like the design;
- * taller screens centre it.
+ * Layout shared by the sign-in and sign-up pages: intro copy and illustration
+ * on the left, the form card on the right. Taller screens centre the card.
  */
 export function AuthShell({
   intro,
@@ -30,30 +28,30 @@ export function AuthShell({
 }: AuthShellProps) {
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="layout-container pt-6 lg:pt-[34px]">
+      <header className="layout-container pt-6 lg:pt-8">
         <Link
           href={PUBLIC_ROUTES.home}
           aria-label="ByteSpace home"
-          className="focus-visible:outline-bs-lime flex w-fit rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 lg:ml-0.5"
+          className="focus-visible:outline-bs-lime flex w-fit rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4"
         >
-          <ByteSpaceMark className="h-[34px]" />
+          <ByteSpaceMark className="h-8.5" />
         </Link>
       </header>
 
-      <div className="layout-container grid flex-1 content-start gap-10 pt-8 pb-10 lg:grid-cols-2 lg:content-center lg:pt-[52px] lg:pb-[120px]">
-        <div className="flex flex-col lg:pl-0.5">
+      <div className="layout-container grid flex-1 content-start gap-10 pt-8 pb-10 lg:grid-cols-2 lg:content-center lg:pt-13 lg:pb-30">
+        <div className="flex flex-col">
           <p className="typo-heading-xs text-bs-gray-50">{intro.title}</p>
-          <p className="typo-body-m sm:typo-body-l text-bs-gray-50 mt-4 max-w-[480px]">
+          <p className="typo-body-m sm:typo-body-l text-bs-gray-50 mt-4 max-w-120">
             {intro.description}
           </p>
-          <AuthIllustration className="mt-auto mb-[42px] hidden origin-bottom-left scale-[.85] lg:block xl:scale-100" />
+          <AuthIllustration className="mt-auto mb-10 hidden origin-bottom-left scale-85 lg:block xl:scale-100" />
         </div>
 
-        <section className="flex flex-col rounded-[28px] bg-white px-6 py-10 sm:px-10 lg:min-h-[784px] lg:px-16 lg:pt-16 lg:pb-10">
-          <p className="typo-body-l text-bs-blue-800 leading-[1.2]">
+        <section className="flex flex-col rounded-4xl bg-white px-6 py-10 sm:px-10 lg:min-h-[784px] lg:px-16 lg:pt-16 lg:pb-10">
+          <p className="typo-body-l text-bs-blue-800 leading-tight">
             {eyebrow}
           </p>
-          <h1 className="typo-heading-s sm:typo-heading-m text-bs-ink mt-[5px]">
+          <h1 className="typo-heading-s sm:typo-heading-m text-bs-ink mt-1">
             {heading}
           </h1>
           {children}

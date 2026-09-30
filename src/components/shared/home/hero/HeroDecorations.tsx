@@ -3,7 +3,7 @@ import {
   type FloatingShape,
 } from "@/components/shared/decorations/FloatingShapes";
 
-// Sliced from ui/Landing/3d ornament.png (bottom-aligned in the 1440×1024 hero).
+// Positions are px at xl, measured from the top of the hero.
 const SHAPES: FloatingShape[] = [
   {
     src: "/images/decorations/lime-spiral.png",

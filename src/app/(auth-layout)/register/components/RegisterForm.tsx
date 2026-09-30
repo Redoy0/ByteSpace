@@ -10,7 +10,6 @@ import FormWrapper from "@/components/form/FormWrapper";
 import {
   authInputClass,
   authLabelClass,
-  authSubmitClass,
 } from "@/components/shared/auth/authFieldStyles";
 import { Button } from "@/components/ui/button";
 import { registerRequest } from "@/lib/auth/loginRequest";
@@ -48,7 +47,7 @@ export function RegisterForm() {
       onSubmit={onSubmit}
       resolver={zodResolver(registerSchema)}
       defaultValues={{ name: "", email: "", password: "" }}
-      className="mt-[41px] space-y-6"
+      className="mt-10 space-y-6"
     >
       <BSInput
         name="name"
@@ -83,10 +82,9 @@ export function RegisterForm() {
         <Button
           type="submit"
           variant="lime"
-          size="pill"
+          size="pill-md"
           loading={isSubmitting}
           loadingText="Creating account…"
-          className={authSubmitClass}
         >
           Continue
         </Button>

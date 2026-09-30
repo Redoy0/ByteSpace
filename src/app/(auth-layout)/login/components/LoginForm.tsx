@@ -10,7 +10,6 @@ import FormWrapper from "@/components/form/FormWrapper";
 import {
   authInputClass,
   authLabelClass,
-  authSubmitClass,
 } from "@/components/shared/auth/authFieldStyles";
 import { Button } from "@/components/ui/button";
 import { loginRequest } from "@/lib/auth/loginRequest";
@@ -48,7 +47,7 @@ export function LoginForm() {
       onSubmit={onSubmit}
       resolver={zodResolver(loginSchema)}
       defaultValues={{ email: "", password: "" }}
-      className="mt-[41px] space-y-6"
+      className="mt-10 space-y-6"
     >
       <BSInput
         name="email"
@@ -75,10 +74,9 @@ export function LoginForm() {
         <Button
           type="submit"
           variant="lime"
-          size="pill"
+          size="pill-md"
           loading={isSubmitting}
           loadingText="Signing in…"
-          className={authSubmitClass}
         >
           Sign In
         </Button>

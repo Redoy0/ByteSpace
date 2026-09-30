@@ -44,6 +44,7 @@ const buttonVariants = cva(
         "icon-lg": "size-10",
         // ByteSpace pill buttons
         pill: "h-11 rounded-full px-6 text-base font-normal",
+        "pill-md": "h-11.5 rounded-full px-6 text-lg font-normal",
         "pill-lg": "h-12 rounded-full px-7 text-lg font-normal",
       },
     },

@@ -1,37 +1,26 @@
 import Image from "next/image";
+import { Glow } from "@/components/shared/decorations/Glow";
 import { MOCK_TESTIMONIALS } from "@/data/home";
 
-/**
- * "Discover What Our Community Is Saying"
- * (public/images/testimonials/Testimonials_Frame.png). Body copy is the
- * design's #4f4f4f, which has no token.
- */
 export function TestimonialsSection() {
   return (
     <section
       aria-labelledby="testimonials-title"
-      className="bg-bs-testimonials relative isolate overflow-hidden py-16 md:py-20 xl:pt-[74px] xl:pb-[59px]"
+      className="bg-bs-testimonials relative isolate overflow-hidden py-16 md:py-20 xl:pt-18 xl:pb-15"
     >
-      {/* Figma: 1144×1132 at 842, -241 and 664×678 at 395, -138 in the 1440 frame; they follow the content */}
-      <div
-        aria-hidden="true"
-        className="bg-bs-lime-glow pointer-events-none absolute top-[-241px] left-[calc(50%_+_122px)] h-[1132px] w-[1144px]"
-      />
-      <div
-        aria-hidden="true"
-        className="bg-bs-lime-glow pointer-events-none absolute top-[-138px] left-[calc(50%_-_325px)] h-[678px] w-[664px] [--glow-alpha:0.6]"
-      />
+      <Glow className="-top-[245px] left-[calc(50%+125px)]" />
+      <Glow size="md" strong className="-top-[135px] left-[calc(50%-330px)]" />
 
       <div className="layout-container relative">
         <div className="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-9">
           <h2
             id="testimonials-title"
-            className="typo-heading-s md:typo-heading-m lg:typo-heading-s xl:typo-heading-m text-black xl:-ml-0.5"
+            className="typo-heading-s md:typo-heading-m lg:typo-heading-s xl:typo-heading-m text-black"
           >
             Discover What Our <br className="hidden sm:block" />
             Community Is Saying
           </h2>
-          <p className="typo-body-m sm:typo-body-l text-[#4f4f4f]">
+          <p className="typo-body-m sm:typo-body-l text-bs-gray-700">
             At ByteSpace, our vibrant community of learners and creators is at
             the heart of what we do. Hear directly from those who have
             experienced the transformative journey of learning and creating on
@@ -40,8 +29,7 @@ export function TestimonialsSection() {
           </p>
         </div>
 
-        {/* Figma: 3×374px cards + 41px gaps = 1204px, 2px wider than the container */}
-        <div className="mt-10 grid items-start gap-6 lg:grid-cols-3 xl:-mx-0.5 xl:mt-[73px] xl:gap-[41px]">
+        <div className="mt-10 grid items-start gap-6 lg:grid-cols-3 xl:mt-18 xl:gap-10">
           {MOCK_TESTIMONIALS.map((testimonial) => (
             <figure
               key={testimonial.id}
@@ -62,7 +50,7 @@ export function TestimonialsSection() {
                   {testimonial.role}
                 </p>
               </figcaption>
-              <blockquote className="typo-body-l mt-6 text-[#4f4f4f]">
+              <blockquote className="typo-body-l text-bs-gray-700 mt-6">
                 {`"${testimonial.quote}"`}
               </blockquote>
             </figure>

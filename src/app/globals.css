@@ -154,6 +154,13 @@
   --animate-caret-blink: caret-blink 1.25s ease-out infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-soft: float-soft 7s ease-in-out infinite;
+  /* Drop into place, then keep floating. Stagger with [--delay:…] */
+  --animate-drop-float:
+    drop-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both,
+    float-soft 6s ease-in-out calc(var(--delay, 0s) + 0.8s) infinite;
+  --animate-drop-bob:
+    drop-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both,
+    float 5s ease-in-out calc(var(--delay, 0s) + 0.8s) infinite;
   --animate-duration: 0.2s;
   --animate-enter-opacity: initial;
   --animate-enter-scale: initial;
@@ -213,6 +220,7 @@
   --color-bs-blue: var(--bs-blue-800);
   --color-bs-lime: var(--bs-lime-400);
   --color-bs-ink: var(--bs-gray-950);
+  --color-bs-navy: var(--bs-navy);
 
   /* Effect styles (Figma "A" / "B") */
   --shadow-bs-float: var(--bs-shadow-a);
@@ -287,6 +295,9 @@
   --bs-gray-800: #424348;
   --bs-gray-900: #3a3b3f;
   --bs-gray-950: #242528;
+
+  /* Section headings ("ByteSpace Navy") */
+  --bs-navy: #040819;
 
   /* Effect style "A" — large soft float (hero / growth imagery) */
   --bs-shadow-a:
@@ -536,9 +547,8 @@
       linear-gradient(to right, var(--grid-line) 2px, transparent 2px),
       linear-gradient(to bottom, var(--grid-line) 2px, transparent 2px);
     background-size: var(--grid-size) var(--grid-size);
-    /* keep a line on the page centre, like the 1440px design (lines every 120px from x=0);
-       --grid-y shifts the rows (the CTA frame's start 2px up) */
-    background-position: calc(50% + var(--grid-size) / 2) var(--grid-y, 0);
+    /* keep a line on the page centre, like the 1440px design (lines every 120px from x=0) */
+    background-position: calc(50% + var(--grid-size) / 2) 0;
     --grid-size: 120px;
   }
   @media (max-width: 767px) {
@@ -548,9 +558,8 @@
   }
 
   /*
-   * Growth + creator share one canvas in Figma (ui/Landing/Frame 15.png) and
-   * each section paints its half. The left blue glow straddles the seam, so
-   * both halves use the same px size and centre (49px below the seam).
+   * The growth and creator sections read as one canvas. The blue glow on the
+   * left straddles the seam, so both halves use the same size and centre.
    */
   .bg-bs-growth {
     background-color: #f7f8fa;
@@ -588,9 +597,8 @@
   }
 
   /*
-   * 404 numerals (ui/404.png): lime easing into the page blue towards the
-   * baseline. Stops are lime→blue-800 mixes sampled from the design, in % of
-   * a leading-none line box.
+   * 404 numerals: lime that eases into the page blue towards the baseline.
+   * Stops are % of a leading-none line box.
    */
   .text-lime-fade {
     background: linear-gradient(
@@ -604,7 +612,7 @@
     color: transparent;
   }
 
-  /* Figma's lime glow ellipse. --glow-alpha is the peak: 0.4 (default) or 0.6 */
+  /* Soft lime radial glow. --glow-alpha sets the centre strength (0.4 default) */
   .bg-bs-lime-glow {
     background: radial-gradient(
       50% 50% at 50% 50%,
@@ -631,6 +639,18 @@
   }
   50% {
     transform: translate3d(0, -10px, 0) rotate(2deg);
+  }
+}
+
+/* Uses translate (not transform) so it can run alongside a float animation */
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    translate: 0 -32px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
   }
 }
 

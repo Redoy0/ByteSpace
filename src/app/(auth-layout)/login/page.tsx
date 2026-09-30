@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AuthShell } from "@/components/shared/auth/AuthShell";
+import { authLinkClass } from "@/components/shared/auth/authFieldStyles";
 import { SocialAuthButtons } from "@/components/shared/auth/SocialAuthButtons";
 import { AUTH_ROUTES } from "@/constant/routes";
 import { LoginForm } from "./components/LoginForm";
@@ -24,10 +25,7 @@ export default function LoginPage() {
       footer={
         <>
           New user?{" "}
-          <Link
-            href={AUTH_ROUTES.register}
-            className="text-bs-blue-800 focus-visible:outline-bs-blue-800 rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-          >
+          <Link href={AUTH_ROUTES.register} className={authLinkClass}>
             Create an account
           </Link>
         </>

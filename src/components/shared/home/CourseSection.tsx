@@ -8,9 +8,8 @@ import {
 import { CourseBrowser } from "./CourseBrowser";
 
 /**
- * "Discover Your Passion" (ui/HomePage.png). The featured courses and the
- * category list are prefetched on the server, so the grid renders without a
- * loading state; picking a category then refetches on the client.
+ * Featured courses and categories are prefetched on the server so the grid
+ * renders without a loading state; picking a category refetches on the client.
  */
 export async function CourseSection() {
   const queryClient = getQueryClient();
@@ -26,13 +25,13 @@ export async function CourseSection() {
   return (
     <section
       aria-labelledby="courses-title"
-      className="bg-white py-14 md:py-20 xl:pt-[72px] xl:pb-[72px]"
+      className="bg-white py-14 md:py-20 xl:py-18"
     >
       <div className="layout-container">
-        <div className="mx-auto max-w-[917px] text-center">
+        <div className="mx-auto max-w-[920px] text-center">
           <h2
             id="courses-title"
-            className="typo-heading-s md:typo-heading-m text-[#040819]"
+            className="typo-heading-s md:typo-heading-m text-bs-navy"
           >
             Discover Your Passion,
             <br />

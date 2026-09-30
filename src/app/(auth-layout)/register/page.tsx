@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AuthShell } from "@/components/shared/auth/AuthShell";
+import { authLinkClass } from "@/components/shared/auth/authFieldStyles";
 import { AUTH_ROUTES } from "@/constant/routes";
 import { RegisterForm } from "./components/RegisterForm";
 
@@ -23,10 +24,7 @@ export default function RegisterPage() {
       footer={
         <>
           Already have an account?{" "}
-          <Link
-            href={AUTH_ROUTES.login}
-            className="text-bs-blue-800 focus-visible:outline-bs-blue-800 rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-          >
+          <Link href={AUTH_ROUTES.login} className={authLinkClass}>
             Login
           </Link>
         </>

@@ -3,12 +3,11 @@ import { StarFilledIcon } from "@/components/icons/svgIcons";
 import { cn } from "@/lib/utils";
 
 /*
- * Small white "floating" info cards used over imagery in the hero, growth
- * and creator sections. Sizes follow the design frames (e.g. 208×70,
- * 232×130, 257×120) and they contain only presentational data.
+ * Small "floating" info cards used over imagery (hero, auth pages).
+ * Presentational only.
  */
 
-const floatingCard = "rounded-[16px] bg-white text-bs-ink";
+const floatingCard = "rounded-2xl bg-white text-bs-ink";
 
 interface CategoryHighlightCardProps {
   title: string;

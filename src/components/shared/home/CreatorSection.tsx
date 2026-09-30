@@ -1,26 +1,19 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
+import { Glow } from "@/components/shared/decorations/Glow";
 import { Tilt } from "@/components/shared/motion/Tilt";
 import { CREATOR_FEATURES } from "@/data/home";
 
-/**
- * "Create & Manage Courses Easily" (ui/Landing/Frame 15.png, bottom half).
- * The revenue cards, creator and Happy Students card are one exported
- * composition with a baked-in drop shadow.
- */
 export function CreatorSection() {
   return (
     <section
       aria-labelledby="creator-title"
-      className="bg-bs-creator relative isolate overflow-hidden pt-8 pb-16 md:pb-20 xl:pb-[127px]"
+      className="bg-bs-creator relative isolate overflow-hidden pt-8 pb-16 md:pb-20 xl:pb-32"
     >
-      {/*
-       * Figma: 664×678 at -287, 946 in the 1460px frame, i.e. 164px past the
-       * section bottom. Pinned to -287px at 1440; follows the content wider.
-       */}
-      <div
-        aria-hidden="true"
-        className="bg-bs-lime-glow pointer-events-none absolute bottom-[-164px] left-[max(-287px,calc(50%_-_1007px))] h-[678px] w-[664px] [--glow-alpha:0.6]"
+      <Glow
+        size="md"
+        strong
+        className="-bottom-40 left-[max(-290px,calc(50%-1010px))]"
       />
 
       <div className="layout-container relative">
@@ -56,13 +49,8 @@ export function CreatorSection() {
             </ul>
           </div>
 
-          {/*
-           * The box is the composition's top 587×598 (down to the photo's
-           * edge), so the text centres on it; the shadow hangs below. Below lg
-           * the 4% nudge centres the cards rather than cards + empty margin.
-           */}
+          {/* The box covers the cards only; the image's shadow hangs below it */}
           <div className="relative mx-auto aspect-[587/598] w-full max-w-[587px] max-lg:translate-x-[4%] lg:order-1">
-            {/* Tilts towards the mouse; the image itself bobs gently */}
             <Tilt className="absolute inset-0">
               <Image
                 src="/images/creatorSection/left-creator.png"
@@ -71,7 +59,7 @@ export function CreatorSection() {
                 height={719}
                 sizes="(min-width: 1280px) 580px, (min-width: 1024px) 50vw, 587px"
                 className="motion-safe:animate-float-soft absolute top-0 left-0 h-auto w-full"
-                // Out of step with the growth image
+                // Offset so it doesn't bob in sync with the growth image
                 style={{ animationDelay: "-3.5s" }}
               />
             </Tilt>

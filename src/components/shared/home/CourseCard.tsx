@@ -25,9 +25,8 @@ const formatDuration = (minutes: number) => {
 };
 
 /*
- * Course card — ui/Landing/Frame 8.png (373×384 at 1440px).
- * 24px radius, 1px gray-200 border, 16px inset; 341×196 thumbnail with
- * frosted meta pills; Poppins title; level pill + learner avatars; price.
+ * Course card: thumbnail with frosted meta pills, title and rating, level pill,
+ * learner avatars and price. The whole card links to the course.
  */
 export function CourseCard({
   course,
@@ -47,11 +46,11 @@ export function CourseCard({
   return (
     <article
       className={cn(
-        "group hover:shadow-bs-card relative flex flex-col rounded-[24px] border border-(--bs-gray-200) bg-white p-[15px] pb-5 transition-shadow duration-200",
+        "group hover:shadow-bs-card relative flex flex-col rounded-3xl border border-(--bs-gray-200) bg-white p-[15px] pb-5 transition-shadow duration-200",
         className
       )}
     >
-      <div className="relative aspect-[341/195.5] overflow-hidden rounded-[12px]">
+      <div className="relative aspect-[341/195.5] overflow-hidden rounded-xl">
         <Image
           src={course.thumbnail}
           alt=""
@@ -67,7 +66,7 @@ export function CourseCard({
           {meta.map((item) => (
             <li
               key={item}
-              className="text-bs-gray-700 flex h-[25.5px] items-center rounded-full bg-white/55 px-2.5 text-xs whitespace-nowrap backdrop-blur-sm xl:px-[13px]"
+              className="text-bs-gray-700 flex h-6.5 items-center rounded-full bg-white/55 px-2.5 text-xs whitespace-nowrap backdrop-blur-sm xl:px-3"
             >
               {item}
             </li>
@@ -84,12 +83,12 @@ export function CourseCard({
           {/* Stretched link: the whole card opens the course */}
           <Link
             href={`${PUBLIC_ROUTES.courses}/${course.slug}`}
-            className="focus-visible:outline-bs-blue rounded-sm after:absolute after:inset-0 after:rounded-[24px] focus-visible:outline-2"
+            className="focus-visible:outline-bs-blue rounded-sm after:absolute after:inset-0 after:rounded-3xl focus-visible:outline-2"
           >
             {course.title}
           </Link>
         </h3>
-        <p className="text-bs-gray-700 mt-[5px] mr-[3px] flex shrink-0 items-center gap-[3px] text-[17px] leading-none">
+        <p className="text-bs-gray-700 mt-1 mr-0.5 flex shrink-0 items-center gap-0.5 text-[17px] leading-none">
           <span className="sr-only">Rated</span>
           {course.rating.toFixed(1)}
           <StarRoundedIcon
@@ -106,7 +105,7 @@ export function CourseCard({
       </p>
 
       <div className="mt-4 flex items-center gap-3">
-        <span className="bg-bs-gray-50 text-bs-gray-700 flex h-8 items-center gap-2 rounded-full pr-[14px] pl-4 text-xs">
+        <span className="bg-bs-gray-50 text-bs-gray-700 flex h-8 items-center gap-2 rounded-full pr-3.5 pl-4 text-xs">
           <LevelBarsIcon className="h-[13px] w-3" />
           {course.level}
         </span>
@@ -123,7 +122,7 @@ export function CourseCard({
         />
       </div>
 
-      <p className="mt-[18px] flex items-baseline">
+      <p className="mt-4.5 flex items-baseline">
         <span className="text-bs-blue text-xl leading-none font-bold">
           ${course.price}
         </span>

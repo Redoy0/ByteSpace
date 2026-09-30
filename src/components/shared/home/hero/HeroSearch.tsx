@@ -39,13 +39,13 @@ export function HeroSearch({ className }: { className?: string }) {
           type="search"
           autoComplete="off"
           placeholder="Course, topic, creator"
-          className="typo-body-m sm:typo-body-l text-bs-ink placeholder:text-bs-gray-400 focus-visible:ring-bs-lime h-12 w-full rounded-full bg-white pr-5 pl-12 transition-[box-shadow] duration-200 outline-none hover:shadow-[0_12px_32px_-12px_rgb(7_30_95/0.6)] hover:ring-4 hover:ring-white/25 focus-visible:ring-4 sm:h-[52px] sm:pl-14"
+          className="typo-body-m sm:typo-body-l text-bs-ink placeholder:text-bs-gray-400 focus-visible:ring-bs-lime h-12 w-full rounded-full bg-white pr-5 pl-12 transition-[box-shadow] duration-200 outline-none hover:shadow-[0_12px_32px_-12px_rgb(7_30_95/0.6)] hover:ring-4 hover:ring-white/25 focus-visible:ring-4 sm:h-13 sm:pl-14"
         />
       </div>
       <Button
         type="submit"
         variant="lime"
-        className="typo-body-m sm:typo-body-l h-12 rounded-full px-5 focus-visible:ring-white/60 sm:h-[46px] sm:px-6"
+        className="typo-body-m sm:typo-body-l h-12 rounded-full px-5 focus-visible:ring-white/60 sm:h-11.5 sm:px-6"
       >
         Search
       </Button>
