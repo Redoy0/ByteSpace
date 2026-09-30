@@ -3,14 +3,14 @@ import { cn } from "@/lib/utils";
 
 export interface FloatingShape {
   src: string;
-  /** Which viewport edge the shape is anchored to (as in the design). */
+  /** Viewport edge the shape is anchored to. */
   side: "left" | "right";
-  /** Distance from that edge, in design px (1440 frame). */
+  /** Distance from that edge, in px at xl. */
   inset: number;
-  /** Distance from the section top — or bottom, if set instead — in design px. */
+  /** Distance from the section top, or bottom if that's set instead (px at xl). */
   top?: number;
   bottom?: number;
-  /** Rendered size in design px (the file may be a 2x export). */
+  /** Rendered size in px (the file may be larger, e.g. a 2x export). */
   w: number;
   h: number;
   /** Float animation offset (s) so shapes don't bob in sync. */
@@ -33,9 +33,9 @@ const floatClass = "motion-safe:animate-float";
 /**
  * Decorative 3D shapes for a `relative overflow-hidden` section.
  *
- * md+: each shape keeps its design distance from the left or right edge of
- * the viewport, so edge shapes always bleed off the real screen edge at any
- * width. Below 1280px they shrink (65%) towards that corner.
+ * md+: each shape keeps a fixed distance from the left or right edge of the
+ * viewport, so edge shapes bleed off the screen at any width. Below xl they
+ * shrink to 65% towards their corner.
  * < md: a lighter, re-positioned subset.
  */
 export function FloatingShapes({

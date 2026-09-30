@@ -44,7 +44,7 @@ export function MobileMenu() {
         <div className="flex h-18 items-center border-b border-(--bs-gray-100) px-5">
           <SheetClose asChild>
             <Link href="/" aria-label="ByteSpace home">
-              <BrandLogo className="h-[30px]" />
+              <BrandLogo className="h-7.5" />
             </Link>
           </SheetClose>
         </div>

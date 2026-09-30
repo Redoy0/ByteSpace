@@ -39,11 +39,10 @@ const LEGAL_LINKS = [
 const linkClass =
   "rounded-sm transition-colors hover:text-bs-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bs-blue-800";
 
-/** Site footer (public/images/Footer/Footer.png). */
 export function Footer() {
   return (
     <footer className="text-bs-ink border-t border-(--bs-gray-200) bg-white">
-      <div className="layout-container pt-12 pb-10 md:pt-[70px] md:pb-[47px]">
+      <div className="layout-container pt-12 pb-10 md:pt-18 md:pb-12">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-10">
           <div>
             <Link
@@ -58,25 +57,25 @@ export function Footer() {
               our newsletter.
             </p>
 
-            {/* The 504px row (376px field + 24px + button) also sets the disclaimer's wrap */}
-            <div className="mt-[45px] flex max-w-[504px] items-start gap-3 sm:gap-6">
+            {/* The form row's width also sets where the disclaimer wraps */}
+            <div className="mt-11 flex max-w-125 items-start gap-3 sm:gap-6">
               <input
                 type="email"
                 aria-label="Email address"
                 placeholder="Enter your email"
                 autoComplete="email"
-                className="typo-body-m placeholder:text-bs-ink focus-visible:ring-bs-blue-800/20 h-[52px] min-w-0 flex-1 rounded-full border border-(--bs-gray-200) bg-white px-6 outline-none focus-visible:border-(--bs-blue-800) focus-visible:ring-4"
+                className="typo-body-m placeholder:text-bs-ink focus-visible:ring-bs-blue-800/20 h-13 min-w-0 flex-1 rounded-full border border-(--bs-gray-200) bg-white px-6 outline-none focus-visible:border-(--bs-blue-800) focus-visible:ring-4"
               />
               <Button
                 type="button"
                 variant="lime"
-                size="pill"
-                className="h-[46px] shrink-0 px-[25px] text-lg"
+                size="pill-md"
+                className="shrink-0"
               >
                 Search
               </Button>
             </div>
-            <p className="typo-body-xs mt-6 max-w-[504px]">
+            <p className="typo-body-xs mt-6 max-w-125">
               By subscribing, you agree to our Privacy Policy and consent to
               receive updates from our company.
             </p>
@@ -84,16 +83,16 @@ export function Footer() {
 
           <nav
             aria-label="Footer"
-            className="grid grid-cols-2 gap-x-[41px] gap-y-4 sm:grid-cols-3 lg:pt-12"
+            className="grid grid-cols-2 gap-x-10 gap-y-4 sm:grid-cols-3 lg:pt-12"
           >
             {LINK_COLUMNS.map((links, i) => (
               <ul
                 key={links[0].label}
                 className={cn(
-                  "typo-body-s flex flex-col gap-4 leading-[22px]",
+                  "typo-body-s flex flex-col gap-4 leading-5.5",
                   // phones: 2 columns, so the last list spreads across both
                   i === LINK_COLUMNS.length - 1 &&
-                    "max-sm:col-span-2 max-sm:grid max-sm:grid-cols-2 max-sm:gap-x-[41px]"
+                    "max-sm:col-span-2 max-sm:grid max-sm:grid-cols-2 max-sm:gap-x-10"
                 )}
               >
                 {links.map((link) => (
@@ -108,7 +107,7 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-(--bs-gray-200) pt-[23px] sm:flex-row sm:items-center sm:justify-between lg:mt-32">
+        <div className="mt-16 flex flex-col gap-3 border-t border-(--bs-gray-200) pt-6 sm:flex-row sm:items-center sm:justify-between lg:mt-32">
           <p className="typo-body-xs">
             © {new Date().getFullYear()} ByteSpace. All rights reserved.
           </p>
