@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Provider from "@/providers/Provider";
 import { envConfig } from "@/config/envConfig";
@@ -162,6 +163,8 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Provider>{children}</Provider>
+        {/* Real-user Core Web Vitals; only reports on Vercel deployments */}
+        <SpeedInsights />
       </body>
     </html>
   );

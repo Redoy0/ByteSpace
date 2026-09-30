@@ -57,7 +57,7 @@ The backend is a separate service. Until it is available, the app serves mock da
 | Forms     | [React Hook Form](https://react-hook-form.com/) + [Zod 4](https://zod.dev/)                                                                                     |
 | Icons     | [Hugeicons](https://hugeicons.com/), [Lucide](https://lucide.dev/), custom SVGs                                                                                 |
 | Tooling   | ESLint 9, Prettier (with the Tailwind plugin), lint-staged config (no Git hook installed yet)                                                                   |
-| Delivery  | Vercel, or Docker (multi-stage, Node 24 Alpine)                                                                                                                 |
+| Delivery  | Vercel (with Speed Insights), or Docker (multi-stage, Node 24 Alpine)                                                                                           |
 
 ## Getting started
 
@@ -189,6 +189,8 @@ sequenceDiagram
 3. Deploy. Every push to the production branch redeploys, and other branches get preview URLs.
 
 `NEXT_PUBLIC_APP_URL` can be left empty on Vercel: the app falls back to the deployment's own URL. Set it once you add a custom domain.
+
+[Speed Insights](https://vercel.com/docs/speed-insights) is wired into the root layout; turn it on under the project's **Speed Insights** tab and redeploy to start collecting Core Web Vitals from real visitors.
 
 ### Docker
 
