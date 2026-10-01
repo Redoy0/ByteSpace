@@ -274,6 +274,6 @@ In production, pages are never cached, so a deploy never serves stale HTML. Publ
 
 </details>
 
----------------------------------------------------------------
+---
 
 © 2026 [Redoy0](https://github.com/Redoy0). All rights reserved.
