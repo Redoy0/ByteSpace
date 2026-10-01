@@ -14,7 +14,7 @@ export function HeroSection() {
     >
       <HeroDecorations />
 
-      <div className="layout-container relative z-[2] pt-26 text-center md:pt-38 lg:pt-42">
+      <div className="layout-container relative z-[2] pt-20 text-center md:pt-28 lg:pt-38">
         <h1
           id="hero-title"
           className="typo-heading-s sm:typo-heading-m lg:typo-heading-l mx-auto max-w-[900px] text-balance text-white"
@@ -22,7 +22,7 @@ export function HeroSection() {
           Get Access to Hundreds <br className="hidden sm:block" />
           Courses Available
         </h1>
-        <p className="typo-body-m sm:typo-body-l text-bs-gray-50 mx-auto mt-4 max-w-[820px] sm:mt-6 lg:mt-8 lg:max-w-[720px] xl:max-w-[820px]">
+        <p className="typo-body-m sm:typo-body-l text-bs-gray-50 mx-auto mt-1 max-w-[820px] sm:mt-2 lg:mt-4 lg:max-w-[720px] xl:max-w-[820px]">
           Unlock your creativity, gain valuable knowledge, and grow your
           business with our wide range of courses.
         </p>
