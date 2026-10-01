@@ -4,6 +4,7 @@
 
 **Learn, grow and create: an online learning and course marketplace.**
 
+[![CI/CD](https://github.com/Redoy0/ByteSpace/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Redoy0/ByteSpace/actions/workflows/ci-cd.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -57,7 +58,7 @@ The backend is a separate service. Until it is available, the app serves mock da
 | Forms     | [React Hook Form](https://react-hook-form.com/) + [Zod 4](https://zod.dev/)                                                                                     |
 | Icons     | [Hugeicons](https://hugeicons.com/), [Lucide](https://lucide.dev/), custom SVGs                                                                                 |
 | Tooling   | ESLint 9, Prettier (with the Tailwind plugin), lint-staged config (no Git hook installed yet)                                                                   |
-| Delivery  | Vercel (with Speed Insights), or Docker (multi-stage, Node 24 Alpine)                                                                                           |
+| Delivery  | GitHub Actions CI/CD to Vercel (with Speed Insights), or Docker (multi-stage, Node 24 Alpine)                                                                   |
 
 ## Getting started
 
@@ -180,13 +181,33 @@ sequenceDiagram
 
 ## Deployment
 
+### CI/CD
+
+[GitHub Actions](.github/workflows/ci-cd.yml) runs on every pull request into `main` or `dev` and on every push to them:
+
+| Job                  | What it does                                                                                       |
+| -------------------- | -------------------------------------------------------------------------------------------------- |
+| Lint, types & format | `npm run lint`, `npm run typecheck` and `npm run format:check`                                     |
+| Build                | `npm run build`, reusing the Next.js build cache from earlier runs                                 |
+| Deploy to Vercel     | Runs only when both jobs pass. Pushes to `main` go to production; pull requests get a preview URL. |
+
+Vercel's own Git deployments are turned off in `vercel.json`, so each commit is deployed once, by the workflow, and only after the checks pass. The deploy job needs three repository secrets (**Settings → Secrets and variables → Actions**):
+
+| Secret              | Where to find it                                                                 |
+| ------------------- | -------------------------------------------------------------------------------- |
+| `VERCEL_TOKEN`      | [vercel.com/account/settings/tokens](https://vercel.com/account/settings/tokens) |
+| `VERCEL_ORG_ID`     | `orgId` in `.vercel/project.json`, created by running `npx vercel link` locally  |
+| `VERCEL_PROJECT_ID` | `projectId` in the same file                                                     |
+
+Pull requests from forks run the checks but are not deployed, because GitHub doesn't share secrets with them.
+
 ### Vercel
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRedoy0%2FByteSpace)
 
-1. Import the repository in Vercel (**Add New → Project**). The Next.js preset is detected automatically, so the build settings can stay as they are.
+1. Create the project: import the repository in Vercel (**Add New → Project**), or run `npx vercel link`. The Next.js preset is detected automatically, so the build settings can stay as they are.
 2. Add the environment variables from the table above. To deploy the front end on its own, leave `NEXT_PUBLIC_USE_MOCK_API` at `true` (mock data, demo sign-in). Once the backend is live, set it to `false` and point `BACKEND_BASE_URL_DOMAIN` at the API.
-3. Deploy. Every push to the production branch redeploys, and other branches get preview URLs.
+3. Add the three secrets listed under [CI/CD](#cicd). From then on, merges to `main` deploy to production and pull requests get preview URLs.
 
 `NEXT_PUBLIC_APP_URL` can be left empty on Vercel: the app falls back to the deployment's own URL. Set it once you add a custom domain.
 
@@ -225,13 +246,14 @@ In production, pages are never cached, so a deploy never serves stale HTML. Publ
 - [ ] Student, creator and admin dashboards
 - [ ] Social sign-in (Facebook, Google)
 - [ ] Newsletter subscription
-- [ ] Automated tests and CI
+- [x] CI/CD with GitHub Actions
+- [ ] Automated tests
 
 ## Contributing
 
 1. Create a branch from `main`, for example `feature/course-detail` or `fix/navbar-focus`.
 2. Write commit messages in the [Conventional Commits](https://www.conventionalcommits.org/) style (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`).
-3. Before opening a pull request, make sure these pass:
+3. Before opening a pull request, make sure these pass (CI runs the same checks):
 
    ```bash
    npm run typecheck && npm run lint && npm run format:check && npm run build
